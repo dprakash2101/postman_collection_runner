@@ -10,5 +10,8 @@ WORKDIR /action
 # Copy the action's code
 COPY . /action
 
+# Install Node.js dependencies
+RUN npm install
+
 # Define the entrypoint
 ENTRYPOINT ["node", "/action/index.js"]
