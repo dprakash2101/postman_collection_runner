@@ -1,5 +1,5 @@
 # Use the latest Node.js image
-FROM node:latest
+FROM node:19
 
 # Install Newman (Postman CLI)
 RUN npm install -g newman
