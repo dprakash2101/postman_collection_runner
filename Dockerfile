@@ -1,5 +1,5 @@
 # Use the latest Node.js image
-FROM node:16
+FROM node:latest
 
 # Create a directory for the action
 WORKDIR /action
@@ -8,7 +8,16 @@ WORKDIR /action
 COPY package*.json ./
 
 # Install Node.js dependencies (including @actions/core and @actions/exec)
-RUN npm install
+# ... other Dockerfile lines ...
+
+# Copy the pre-built node_modules archive
+COPY node_modules.tar.gz /action/node_modules
+
+# Extract the archive
+RUN tar -xzvf /action/node_modules.tar.gz -C /action/node_modules
+
+# ... other Dockerfile lines ...
+
 
 # Install Newman (Postman CLI) globally
 RUN npm install -g newman
