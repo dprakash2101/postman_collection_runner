@@ -1,11 +1,11 @@
-const core = require('@actions/core');
-const exec = require('@actions/exec');
+import { getInput, setFailed } from '@actions/core';
+import { exec as _exec } from '@actions/exec';
 
 async function run() {
   try {
-    const collection = core.getInput('collection');
-    const environment = core.getInput('environment');
-    const reportFile = core.getInput('report-file');
+    const collection = getInput('collection');
+    const environment = getInput('environment');
+    const reportFile = getInput('report-file');
     const newmanArgs = [
       'run',
       collection,
@@ -19,9 +19,9 @@ async function run() {
       newmanArgs.push('--environment', environment);
     }
 
-    await exec.exec('newman', newmanArgs);
+    await _exec('newman', newmanArgs);
   } catch (error) {
-    core.setFailed(error.message);
+    setFailed(error.message);
   }
 }
 
